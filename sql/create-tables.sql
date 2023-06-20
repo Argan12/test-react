@@ -28,5 +28,6 @@ CREATE TABLE [test_react].[dbo].[comment] (
 	id INT PRIMARY KEY IDENTITY(1, 1),
 	article INT NOT NULL,
 	pseudo NVARCHAR(250) NOT NULL,
-	comment TEXT NOT NULL
+	content TEXT NOT NULL,
+	date DATE NOT NULL
 )

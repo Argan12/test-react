@@ -5,7 +5,7 @@ namespace TestReact.Models.Entities;
 
 public partial class User
 {
-    public string? Id { get; set; }
+    public string? Id { get; set; } = null!;
 
     public string? Pseudo { get; set; }
 
