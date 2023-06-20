@@ -31,6 +31,7 @@ public class Startup
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "Musicozor", Version = "v1" });
         });
         services.AddTransient<IArticleService, ArticleService>();
+        services.AddTransient<ICommentService, CommentService>();
         services.AddTransient<IJwtService, JwtService>();
         services.AddTransient<ISecurityService, SecurityService>();
         services.AddTransient<IUserService, UserService>();

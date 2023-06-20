@@ -13,5 +13,5 @@ public partial class Article
 
     public string Content { get; set; } = null!;
 
-    public DateTime Date { get; set; }
+    public DateTime? Date { get; set; }
 }

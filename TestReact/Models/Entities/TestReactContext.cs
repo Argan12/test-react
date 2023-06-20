@@ -30,7 +30,7 @@ public partial class TestReactContext : DbContext
     {
         modelBuilder.Entity<Article>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__article__3213E83F0FECCA2D");
+            entity.HasKey(e => e.Id).HasName("PK__article__3213E83FF75B7984");
 
             entity.ToTable("article");
 
@@ -51,15 +51,18 @@ public partial class TestReactContext : DbContext
 
         modelBuilder.Entity<Comment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__comment__3213E83F5BAF5B16");
+            entity.HasKey(e => e.Id).HasName("PK__comment__3213E83F42266A79");
 
             entity.ToTable("comment");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Article).HasColumnName("article");
-            entity.Property(e => e.Comment1)
+            entity.Property(e => e.Content)
                 .HasColumnType("text")
-                .HasColumnName("comment");
+                .HasColumnName("content");
+            entity.Property(e => e.Date)
+                .HasColumnType("datetime")
+                .HasColumnName("date");
             entity.Property(e => e.Pseudo)
                 .HasMaxLength(250)
                 .HasColumnName("pseudo");
@@ -67,7 +70,7 @@ public partial class TestReactContext : DbContext
 
         modelBuilder.Entity<RefreshToken>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__refresh___3213E83F5FF077DD");
+            entity.HasKey(e => e.Id).HasName("PK__refresh___3213E83F31FFF113");
 
             entity.ToTable("refresh_token");
 
@@ -85,7 +88,7 @@ public partial class TestReactContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__user__3213E83F49703D6E");
+            entity.HasKey(e => e.Id).HasName("PK__user__3213E83F2DFF96B4");
 
             entity.ToTable("user");
 
