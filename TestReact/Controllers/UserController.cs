@@ -38,7 +38,18 @@ public class UserController : ControllerBase
     [Route("registration")]
     public IActionResult Registration([FromBody] User user)
     {
+        if (_context.Users.FirstOrDefault(x => x.Mail == user.Mail) != null)
+        {
+            return Unauthorized(new { message = "Cette adresse e-mail est déjà utilisée." });
+        }
+
+        if (_context.Users.FirstOrDefault(x => x.Pseudo == user.Pseudo) != null)
+        {
+            return Unauthorized(new { message = "Ce pseudo est déjà utilisé." });
+        }
+
         User newUser = _userService.Registration(user);
+
         return Created("/user/", newUser);
     }
 
