@@ -1,0 +1,32 @@
+# Ignore .NET build artifacts
+**/bin/
+**/obj/
+
+# Ignore NuGet packages
+**/nuget/
+
+# Ignore Visual Studio files
+**/*.sln
+**/*.csproj.user
+**/*.user
+
+# Ignore Docker-related files
+.dockerignore
+Dockerfile*
+.dockerignore
+docker-compose*
+
+# Ignore Git-related files
+.git/
+.gitignore
+
+# Ignore editor-specific files
+.vscode/
+*.vs
+*.suo
+*.userprefs
+*.bak
+*.swp
+
+# Ignore documentation files
+**/*.md
