@@ -5,7 +5,7 @@ namespace TestReact.Models.Entities;
 
 public partial class Article
 {
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
     public string Author { get; set; } = null!;
 
