@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using TestReact.Models.Entities;
 
 namespace TestReact.Models.Interfaces;
@@ -22,4 +23,11 @@ public interface IJwtService
     /// <param name="mail">user mail</param>
     /// <returns>Refresh token</returns>
     RefreshToken SaveRefreshToken(string mail);
+
+    /// <summary>
+    /// Parse JWT
+    /// </summary>
+    /// <param name="jwt"></param>
+    /// <returns>Payload</returns>
+    JwtPayload ParseJwt(string jwt);
 }

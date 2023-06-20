@@ -15,6 +15,8 @@ public class GetAllArticles
     public string user_id { get; set; }
 
     public string pseudo { get; set; }
+
+    public string mail { get; set; }
     
     public DateTime date { get; set; }
 }

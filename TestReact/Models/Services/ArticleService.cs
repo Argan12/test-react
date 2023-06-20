@@ -64,4 +64,17 @@ public class ArticleService : IArticleService
             throw new ArgumentException("Unable to get all articles.", e);
         }
     }
+
+    // public void EditArticle(Article updatedArticle)
+    // {
+    //     try
+    //     {
+    //         //Article article = _context.Articles.FirstOrDefault(x => x.Id == updatedArticle.Id);
+    //         _context.SaveChanges();
+    //     }
+    //     catch (ArgumentException e)
+    //     {
+    //         throw new ArgumentException("Error during updating an article.", e);
+    //     }
+    // }
 }
