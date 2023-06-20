@@ -1,0 +1,14 @@
+# Base image
+FROM mcr.microsoft.com/mssql/server:2019-latest
+
+# Environment variables
+ENV ACCEPT_EULA=Y
+ENV SA_PASSWORD=k&VJB3r892a8@
+EXPOSE 1433
+
+# Create working directory
+WORKDIR /
+COPY ./sql/create-db.sql /home/argan/
+COPY ./sql/create-tables.sql /home/argan/
+COPY ./sql/create-procedures.sql /home/argan/
+COPY ./init.sh /home/argan/
