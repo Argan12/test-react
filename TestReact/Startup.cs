@@ -1,6 +1,3 @@
-using TestReact.Models.Entities;
-using TestReact.Models.Interfaces;
-using TestReact.Models.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using TestReact.Middlewares;
+using TestReact.Models.Entities;
+using TestReact.Models.Interfaces;
+using TestReact.Models.Services;
 
 namespace TestReact;
 
@@ -56,6 +57,8 @@ public class Startup
             .AllowAnyMethod()
             .AllowAnyHeader()
         );
+
+        app.UseMiddleware<JwtMiddleware>();
 
         app.UseEndpoints(endpoints =>
         {

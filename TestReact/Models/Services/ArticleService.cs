@@ -29,6 +29,7 @@ public class ArticleService : IArticleService
     {
         try
         {
+            article.Date = DateTime.Now;
             _context.Add(article);
             _context.SaveChanges();
 
