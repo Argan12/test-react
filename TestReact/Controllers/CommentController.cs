@@ -47,4 +47,17 @@ public class CommentController : ControllerBase
         
         return Created("/comment/" + newComment.Id, newComment);
     }
+
+    /// <summary>
+    /// Get all article comments
+    /// </summary>
+    /// <param name="articleId">Article id</param>
+    /// <returns>Http response</returns>
+    [HttpGet]
+    [Route("all/{articleId}")]
+    public IActionResult GetComments(int articleId)
+    {
+        List<Comment> comments = _commentService.GetComments(articleId);
+        return Ok(comments);
+    }
 }

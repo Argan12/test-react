@@ -29,9 +29,29 @@ public class CommentService : ICommentService
         try
         {
             comment.Date = DateTime.Now;
-            
+
             _context.Add(comment);
             _context.SaveChanges();
+        }
+        catch (ArgumentException e)
+        {
+            throw new ArgumentException("Error during publishing a comment.", e);
+        }
+    }
+
+    /// <summary>
+    /// Get all article comments
+    /// </summary>
+    /// <param name="articleId">Article id</param>
+    /// <returns>Comments</returns>
+    public List<Comment> GetComments(int articleId)
+    {
+        try
+        {
+            return _context.Comments
+                .Where(x => x.Article == articleId)
+                .OrderByDescending(x => x.Date)
+                .ToList();
         }
         catch (ArgumentException e)
         {

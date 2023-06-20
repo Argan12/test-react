@@ -61,7 +61,7 @@ public partial class TestReactContext : DbContext
                 .HasColumnType("text")
                 .HasColumnName("content");
             entity.Property(e => e.Date)
-                .HasColumnType("date")
+                .HasColumnType("datetime")
                 .HasColumnName("date");
             entity.Property(e => e.Pseudo)
                 .HasMaxLength(250)
