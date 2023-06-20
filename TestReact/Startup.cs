@@ -1,6 +1,3 @@
-using TestReact.Models.Entities;
-using TestReact.Models.Interfaces;
-using TestReact.Models.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using TestReact.Middlewares;
+using TestReact.Models.Entities;
+using TestReact.Models.Interfaces;
+using TestReact.Models.Services;
+using TestReact.Models.StoredProcedures;
 
 namespace TestReact;
 
@@ -28,10 +30,12 @@ public class Startup
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "Musicozor", Version = "v1" });
         });
+        services.AddTransient<IArticleService, ArticleService>();
         services.AddTransient<IJwtService, JwtService>();
         services.AddTransient<ISecurityService, SecurityService>();
         services.AddTransient<IUserService, UserService>();
         services.AddTransient<TestReactContext>();
+        services.AddTransient<StoredProceduresContext>();
         services.AddDbContext<TestReactContext>(options => 
             options.UseSqlServer(Configuration.GetConnectionString("TestReactContext")), ServiceLifetime.Scoped);
     }
@@ -55,6 +59,8 @@ public class Startup
             .AllowAnyMethod()
             .AllowAnyHeader()
         );
+
+        app.UseMiddleware<JwtMiddleware>();
 
         app.UseEndpoints(endpoints =>
         {

@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.IO;
+using System.IdentityModel.Tokens.Jwt;
 using TestReact.Models.Entities;
 using TestReact.Models.Interfaces;
 
@@ -53,7 +54,7 @@ public class JwtService : IJwtService
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim("id", user.Id.Trim()),
-                    new Claim("mail", user.Mail.Trim())  
+                    new Claim("mail", user.Mail.Trim())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -96,6 +97,26 @@ public class JwtService : IJwtService
         catch (ArgumentException e)
         {
             throw new ArgumentException("An error occurred during saving refresh token.", e);
+        }
+    }
+
+    /// <summary>
+    /// Parse JWT
+    /// </summary>
+    /// <param name="jwt"></param>
+    /// <returns>Payload</returns>
+    public JwtPayload ParseJwt(string jwt)
+    {
+        try
+        {
+            var jwtHandler = new JwtSecurityTokenHandler();
+            var jwtToken = jwtHandler.ReadJwtToken(jwt);
+            
+            return jwtToken.Payload;
+        }
+        catch (ArgumentException e)
+        {
+            throw new ArgumentException("An error occurred during parsing jwt.", e);
         }
     }
 }
