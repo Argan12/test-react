@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using TestReact.Helpers;
 using TestReact.Models.Entities;
 using TestReact.Models.Interfaces;
+using TestReact.Models.StoredProcedures;
 
 namespace TestReact.Controllers;
 
@@ -37,5 +38,17 @@ public class ArticleController : ControllerBase
         Article newArticle = _articleService.Create(article);
 
         return Created("/article/" + newArticle.Id, newArticle);
+    }
+
+    /// <summary>
+    /// Get all articles
+    /// </summary>
+    /// <returns>List of articles</returns>
+    [HttpGet]
+    [Route("all")]
+    public IActionResult GetAllArticles()
+    {
+        List<GetAllArticles> articles = _articleService.GetAllArticles();
+        return Ok(articles);
     }
 }

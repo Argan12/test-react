@@ -9,6 +9,7 @@ using TestReact.Middlewares;
 using TestReact.Models.Entities;
 using TestReact.Models.Interfaces;
 using TestReact.Models.Services;
+using TestReact.Models.StoredProcedures;
 
 namespace TestReact;
 
@@ -34,6 +35,7 @@ public class Startup
         services.AddTransient<ISecurityService, SecurityService>();
         services.AddTransient<IUserService, UserService>();
         services.AddTransient<TestReactContext>();
+        services.AddTransient<StoredProceduresContext>();
         services.AddDbContext<TestReactContext>(options => 
             options.UseSqlServer(Configuration.GetConnectionString("TestReactContext")), ServiceLifetime.Scoped);
     }

@@ -10,4 +10,5 @@ EXPOSE 1433
 WORKDIR /
 COPY ./sql/create-db.sql /home/argan/
 COPY ./sql/create-tables.sql /home/argan/
+COPY ./sql/create-procedures.sql /home/argan/
 COPY ./init.sh /home/argan/

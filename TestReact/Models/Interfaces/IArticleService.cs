@@ -1,4 +1,5 @@
 using TestReact.Models.Entities;
+using TestReact.Models.StoredProcedures;
 
 namespace TestReact.Models.Interfaces;
 
@@ -13,4 +14,10 @@ public interface IArticleService
     /// <param name="article"></param>
     /// <returns></returns>
     Article Create(Article article);
+
+    /// <summary>
+    /// Get all articles
+    /// </summary>
+    /// <returns>Articles</returns>
+    List<GetAllArticles> GetAllArticles();
 }
