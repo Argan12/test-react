@@ -28,6 +28,8 @@ public class CommentService : ICommentService
     {
         try
         {
+            comment.Date = DateTime.Now;
+            
             _context.Add(comment);
             _context.SaveChanges();
         }

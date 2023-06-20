@@ -60,6 +60,9 @@ public partial class TestReactContext : DbContext
             entity.Property(e => e.Content)
                 .HasColumnType("text")
                 .HasColumnName("content");
+            entity.Property(e => e.Date)
+                .HasColumnType("date")
+                .HasColumnName("date");
             entity.Property(e => e.Pseudo)
                 .HasMaxLength(250)
                 .HasColumnName("pseudo");

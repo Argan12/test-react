@@ -12,4 +12,6 @@ public partial class Comment
     public string Pseudo { get; set; } = null!;
 
     public string Content { get; set; } = null!;
+
+    public DateTime? Date { get; set; }
 }
