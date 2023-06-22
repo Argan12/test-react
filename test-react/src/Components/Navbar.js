@@ -1,6 +1,26 @@
 import { Link } from "react-router-dom";
 
+function logout() {
+    localStorage.clear();
+    window.location.href = "/";
+}
+
 export default function Navbar() {
+    var connection = null;
+
+    if (localStorage.getItem("id")) {
+        connection = 
+        <div className="d-flex" role="search">
+            <a href="#" onClick={logout} className="nav-link me-3">Se déconnecter</a>
+        </div>;
+    } else {
+        connection = 
+        <div className="d-flex" role="search">
+            <Link to="/login" className="nav-link me-3">Se connecter</Link>
+            <Link to="/register" className="nav-link">S'inscrire</Link>
+        </div>;
+    }
+    
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
@@ -17,10 +37,8 @@ export default function Navbar() {
                             <Link to="/search" className="nav-link">Rechercher</Link>
                         </li>
                     </ul>
-                    <div className="d-flex" role="search">
-                        <Link to="/" className="nav-link me-3">Se connecter</Link>
-                        <Link to="/register" className="nav-link">S'inscrire</Link>
-                    </div>
+                    
+                    {connection}
                 </div>
             </div>
         </nav>

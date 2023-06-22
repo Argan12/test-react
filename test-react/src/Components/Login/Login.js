@@ -1,28 +1,33 @@
 import { useState } from "react";
 import Navbar from "../Navbar";
 import { Toaster, toast } from "react-hot-toast";
-import { register } from "../../Services/AuthService";
+import { login } from "../../Services/AuthService";
+import Loader from "../Loader";
 
-export function Register() {
+export function Login() {
+    const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState({
-        pseudo: '',
         mail: '',
         password: ''
       });
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(formData);
-        await register(formData).then((response) => {
-            toast.success("Votre compte a bien été créé !");
+        setIsLoading(true);
+
+        await login(formData).then((response) => {
+            localStorage.setItem("id", response.user.id);
+            localStorage.setItem("jwt", response.jwt);
+            localStorage.setItem("refreshToken", response.refreshToken);
+            window.location.href = "/";
         }, (error) => {
+            setIsLoading(false);
             var message = error.response.status == 500
                 ? "Une erreur s'est produite"
                 : error.response.data.message;
             toast.error(message);
         });
         setFormData({
-            pseudo: '',
             mail: '',
             password: ''
         });
@@ -37,20 +42,13 @@ export function Register() {
       };
 
     return (
-        <section id="registration">
+        <section id="login">
             <Navbar />
             <Toaster position="top-right" />
-            <h2 className="text-center">S'inscrire</h2>
+            <h2 className="text-center">Se connecter</h2>
 
             <form onSubmit={handleSubmit} id="search-form" className="row g-3">
                 <div className="col-12">
-                    <input 
-                        type="text" 
-                        name="pseudo" 
-                        className="form-control mb-2"
-                        value={formData.pseudo}
-                        onChange={handleInputChange}
-                        placeholder="Pseudo" />
                     <input 
                         type="text" 
                         name="mail" 
@@ -67,7 +65,10 @@ export function Register() {
                         placeholder="Mot de passe" />
                 </div>
                 <div className="col-auto">
-                    <button type="submit" className="btn btn-primary mb-3">S'inscrire</button>
+                    <button 
+                        type="submit" 
+                        id="loginBtn" 
+                        className="btn btn-primary mb-3">{isLoading ? <Loader /> : 'Se connecter'}</button>
                 </div>
             </form>
         </section>
