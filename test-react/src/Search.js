@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Navbar from "./Navbar";
+import Navbar from "./Components/Navbar";
 import './Search.css';
-import { search } from "./Services/DeezerService";
+import { search } from "./Services/AuthService";
 
 export function Search() {
     const [formData, setFormData] = useState({
