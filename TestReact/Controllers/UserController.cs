@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
 using TestReact.Models.Entities;
 using TestReact.Models.Interfaces;
@@ -48,6 +49,11 @@ public class UserController : ControllerBase
             return Unauthorized(new { message = "Ce pseudo est déjà utilisé." });
         }
 
+        if (String.IsNullOrWhiteSpace(user.Pseudo) || String.IsNullOrWhiteSpace(user.Mail) || String.IsNullOrWhiteSpace(user.Password))
+        {
+            return BadRequest(new { message = "Le formulaire contient des erreurs." });
+        }
+        
         User newUser = _userService.Registration(user);
 
         return Created("/user/", newUser);
