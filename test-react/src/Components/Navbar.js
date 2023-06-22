@@ -17,11 +17,10 @@ export default function Navbar() {
                             <Link to="/search" className="nav-link">Rechercher</Link>
                         </li>
                     </ul>
-                    <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="text" placeholder="E-mail" />
-                        <input className="form-control me-2" type="text" placeholder="Mot de passe" />
-                        <button className="btn btn-outline-success" type="submit">Connexion</button>
-                    </form>
+                    <div className="d-flex" role="search">
+                        <Link to="/" className="nav-link me-3">Se connecter</Link>
+                        <Link to="/register" className="nav-link">S'inscrire</Link>
+                    </div>
                 </div>
             </div>
         </nav>
