@@ -12,7 +12,6 @@ export function Register() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(formData);
         await register(formData).then((response) => {
             toast.success("Votre compte a bien été créé !");
         }, (error) => {

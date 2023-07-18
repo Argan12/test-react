@@ -15,6 +15,11 @@ export async function register(data) {
     return response.data;
 }
 
+/**
+ * Log user
+ * @param {*} data 
+ * @returns 
+ */
 export async function login(data) {
     const response = await axios.post(process.env.REACT_APP_API + '/login', data, {
         headers: {

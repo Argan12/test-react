@@ -14,7 +14,9 @@ code {
 
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-#registration form, #login form {
+#registration form, 
+#login form, 
+#post form {
   display: flex;
   flex-direction: column;
   width: 50%;
