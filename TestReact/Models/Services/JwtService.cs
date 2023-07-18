@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.IdentityModel.Tokens;
@@ -5,7 +6,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.IO;
 using System.IdentityModel.Tokens.Jwt;
 using TestReact.Models.Entities;
 using TestReact.Models.Interfaces;
@@ -17,6 +17,7 @@ namespace TestReact.Models.Services;
 /// </summary>
 public class JwtService : IJwtService
 {
+    private readonly IConfiguration _configuration;
     private readonly TestReactContext _context;
 
     /// <summary>
@@ -24,8 +25,9 @@ public class JwtService : IJwtService
     /// Initialize services
     /// </summary>
     /// <param name="context"></param>
-    public JwtService(TestReactContext context)
+    public JwtService(IConfiguration configuration, TestReactContext context)
     {
+        _configuration = configuration;
         _context = context;
     }
 
@@ -41,12 +43,8 @@ public class JwtService : IJwtService
         try
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-
-            using (StreamReader sr = new StreamReader(@"keys\jwt.txt"))
-            {
-                Key.SecretKey = sr.ReadToEnd();
-            }  
             
+            Key.SecretKey = _configuration.GetValue<string>("Jwt:Secret");
             byte[] key = Encoding.ASCII.GetBytes(Key.SecretKey);
             
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
@@ -81,10 +79,7 @@ public class JwtService : IJwtService
         {
             RefreshToken refreshToken = new();
 
-            using (StreamReader sr = new StreamReader(@"keys\jwt.txt"))
-            {
-                refreshToken.Token = sr.ReadToEnd();
-            }
+            refreshToken.Token = _configuration.GetValue<string>("Jwt:Secret");
             
             refreshToken.Username = mail;
             refreshToken.Date = DateTime.Now;
