@@ -1,26 +1,26 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import Home from './Home';
 import { Register } from './Components/Register/Register';
 import { Login } from './Components/Login/Login';
-import { AuthProvider, RequireAuth } from 'react-auth-kit';
 import NewPost from './Components/Posts/NewPost';
+import { useState } from 'react';
 
 function App() {
+  const [isLoggedIn] = useState(() => localStorage.getItem('jwt') !== null
+  );
+
   return (
-    <AuthProvider authType = {'localstorage'}
-      authName={'id'}>
-      <Router>
+    <Router>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/new-post" element={
-            <RequireAuth loginPath={'/login'}><NewPost /></RequireAuth>
+            isLoggedIn ? <NewPost /> : <Navigate to="/login"/>
           }></Route>
         </Routes>
       </Router>
-    </AuthProvider>
   );
 }
 

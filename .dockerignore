@@ -30,3 +30,5 @@ docker-compose*
 
 # Ignore documentation files
 **/*.md
+
+!/TestReact/keys/
