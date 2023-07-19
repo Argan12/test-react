@@ -1,4 +1,5 @@
 import axios from "axios";
+import { async } from "q";
 
 /**
  * Create new article
@@ -11,6 +12,16 @@ export async function newPost(data) {
             "Accept": "application/json",
             "Content-Type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem('jwt')
+        }
+    });
+    return response.data;
+}
+
+export async function getPosts() {
+    const response = await axios.get(process.env.REACT_APP_API + '/article/all', {
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
         }
     });
     return response.data;

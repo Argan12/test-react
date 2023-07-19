@@ -1,0 +1,22 @@
+.post-container {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    margin: auto;
+    padding: 20px;
+}
+
+.post-container .card:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.post-container .card .card-header {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-date {
+    display: flex;
+    flex-direction: column;
+}

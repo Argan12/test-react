@@ -3,6 +3,7 @@ import Loader from "../Loader";
 import Navbar from "../Navbar";
 import { useState } from "react";
 import { newPost } from "../../Services/PostService";
+import './Posts.css';
 
 export default function NewPost() {
     const [isLoading, setIsLoading] = useState(false);

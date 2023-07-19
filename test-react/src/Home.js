@@ -1,7 +1,11 @@
 import Navbar from "./Components/Navbar";
+import Posts from "./Components/Posts/Posts";
 
-export default function Home() {
+export default function Home() {   
     return (
-        <Navbar />
+        <main>
+            <Navbar />
+            <Posts />
+        </main>
     );
 }
